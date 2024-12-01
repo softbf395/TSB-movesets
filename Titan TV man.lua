@@ -184,7 +184,7 @@ hotbar["5"].Base.MouseButton1Click:Connect(function()
               Hint:Destroy()
             end
 	end
-end
+end)
 function fullReset()
 	resetTools()
 	local ultText=game.Players.LocalPlayer.PlayerGui.ScreenGui.MagicHealth.TextLabel
