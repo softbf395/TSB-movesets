@@ -84,7 +84,7 @@ function customSlotCD(CD, MID)
         local cdf=Instance.new("Frame")
         cdf.Size=UDim2.new(1,0,1,0)
         cdf.BackgroundColor3=Color3.new(1,0,0)
-        cdf.BackgroumdTransparency=0.6
+        cdf.BackgroundTransparency=0.6
         cdf.ZIndex=10
         customCooldowns[tostring(MID)]=CD
         spawn(function()
