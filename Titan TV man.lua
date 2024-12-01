@@ -101,7 +101,7 @@ function customSlotCD(CD, MID)
 		
 local function triggerTeleport(targetPosition)
     --local currentTime = tick()
-    if custonSlotCD(4, 5) then
+    if customSlotCD(4, 5) then
         local character = game.Players.LocalPlayer.Character
         local humanoidRootPart = character:WaitForChild("HumanoidRootPart")
         
