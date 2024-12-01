@@ -70,7 +70,7 @@ local buttonevent = ultText.Parent.TextButton.MouseButton1Click:Connect(function
         text.Text = "I am the titan tv man.."
         task.wait(2)
         text.Text = "And you.. I will go all out!"
-        task.wait(1)
+        task.wait(4)
         
         -- Clean up UI
         text:Destroy()
