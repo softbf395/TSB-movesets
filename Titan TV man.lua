@@ -88,7 +88,7 @@ function customSlotCD(CD, MID)
         cdf.ZIndex=10
         customCooldowns[tostring(MID)]=CD
         spawn(function()
-            game:GetService("TweenService"):Create(cdf, TweenInfo.new(CD, enum.EasingStyle.Linear), {Size=UDim2.new(1,0,0,0), Position=UDim2.new(0,0,1,0)}):Play()
+            game:GetService("TweenService"):Create(cdf, TweenInfo.new(CD, Enum.EasingStyle.Linear), {Size=UDim2.new(1,0,0,0), Position=UDim2.new(0,0,1,0)}):Play()
             wait(CD)
             cdf:Destroy()
             customCooldowns[tostring(MID)]=nil
