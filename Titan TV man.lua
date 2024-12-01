@@ -81,7 +81,7 @@ end
 function customSlotCD(CD, MID)
 			if not customCooldowns[tostring(MID)] then
         local move=hotbar[tostring(MID)].Base
-        local cdf=Instance.new("Frame")
+        local cdf=Instance.new("Frame", hotbar[tostring(MID)].Base)
         cdf.Size=UDim2.new(1,0,1,0)
         cdf.BackgroundColor3=Color3.new(1,0,0)
         cdf.BackgroundTransparency=0.6
@@ -101,7 +101,7 @@ function customSlotCD(CD, MID)
 		
 local function triggerTeleport(targetPosition)
     --local currentTime = tick()
-    if customSlotCD(4, 5) then
+    
         local character = game.Players.LocalPlayer.Character
         local humanoidRootPart = character:WaitForChild("HumanoidRootPart")
         
@@ -121,17 +121,25 @@ local function triggerTeleport(targetPosition)
 
         -- Perform teleportation (adjust position)
         local targetCFrame = CFrame.new(targetPosition) * CFrame.Angles(0, humanoidRootPart.CFrame.Rotation.Y, 0)
-        humanoidRootPart.CFrame = targetCFrame
+        
 
         -- Trigger particle effects
         local particles = Instance.new("ParticleEmitter", humanoidRootPart)
+		particles.Rate=500
+		particles.SpreadAngle=Vector2.new(180,180)
+		particles.Color=ColorSequence.new(Color3.new(0,0,0))
+		particles.Lifetime=NumberRange.new(1)
+		particles.Texture="rbxassetid://377156649"
         particles.Enabled = true
 
         -- Teleportation completed event (when particles are gone)
-        particles.Ended:Connect(function()
-            humanoidRootPart.Anchored = false
+        wait(2)
+		humanoidRootPart.CFrame = targetCFrame
+		humanoidRootPart.Anchored = false
+		wait(2)
+            
             teleporting = false
-        end)
+        particles:Destroy()
 
         -- Handle damage detection and cooldown
         humanoid.HealthChanged:Connect(function(health)
@@ -145,7 +153,7 @@ local function triggerTeleport(targetPosition)
 
         teleporting = true
         lastTeleport = currentTime
-    end
+    
 end
 
 hotbar["1"].Base.ToolName.Text="RSOD"
@@ -153,8 +161,10 @@ hotbar["2"].Base.ToolName.Text="Energy sword 1"
 hotbar["3"].Base.ToolName.Text="Energy sword 2"
 hotbar["4"].Base.ToolName.Text="Core blast"
 hotbar["5"].Base.ToolName.Text="Shadow Teleportation"
+hotbar["5"].Base.Reuse.Visible=false
 hotbar["5"].Visible = true
 hotbar["5"].Base.MouseButton1Click:Connect(function()
+			if customSlotCD(4, 5) then
             local Hint=Instance.new("Hint", workspace)
             wait(1)
             Hint.Text="3"
@@ -173,6 +183,7 @@ hotbar["5"].Base.MouseButton1Click:Connect(function()
               connect:Disconnect()
               Hint:Destroy()
             end)
+	end
 end
 function fullReset()
 	resetTools()
