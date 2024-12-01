@@ -34,8 +34,9 @@ local animCore=Instance.new("Animation", game.ReplicatedStorage)
 animCore.AnimationId="rbxassetid://81133258017045"
 function PlayAnim(anim)
 	game.Players.LocalPlayer.Character:FindFirstChildOfClass("Humanoid"):StopAllAnimations()
-	game.Players.LocalPlayer.Character:FindFirstChildOfClass("Humanoid"):LoadAnimation(anim):Play()
+	game.Players.LocalPlayer.Character:FindFirstChildOfClass("Humanoid"):LoadAnimation(anim):Play(0.1,10000,1)
 end
+	PlayAnim(animES2)
 local hotbar=game.Players.LocalPlayer.PlayerGui.Hotbar.Backpack.Hotbar
 move1.Activated:Connect(function()
 		PlayAnim(animRSOD)
