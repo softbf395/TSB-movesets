@@ -33,7 +33,7 @@ animES2.AnimationId="rbxassetid://110998875969052"
 local animCore=Instance.new("Animation", game.ReplicatedStorage)
 animCore.AnimationId="rbxassetid://81133258017045"
 function PlayAnim(anim)
-	game.Players.LocalPlayer.Character:FindFirstChildOfClass("Humanoid"):StopAllAnimations()
+	for _, track in ipairs(game.Players.LocalPlayer.Character:FindFirstChildOfClass("Humanoid"):GetPlayingAnimationTracks()) do track:Stop() end
 	game.Players.LocalPlayer.Character:FindFirstChildOfClass("Humanoid"):LoadAnimation(anim):Play(0.1,10000,1)
 end
 	PlayAnim(animES2)
