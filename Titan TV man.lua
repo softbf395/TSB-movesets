@@ -157,13 +157,13 @@ hotbar["5"].Visible = true
 hotbar["5"].Base.MouseButton1Click:Connect(function()
             local Hint=Instance.new("Hint", workspace)
             wait(1)
-            Hint.Message="3"
+            Hint.Text="3"
             wait(1)
-            Hint.Message="2"
+            Hint.Text="2"
             wait(1)
-            Hint.Message="1"
+            Hint.Text="1"
             wait(1)
-            Hint.Message="Click anywhere to start teleportation!"
+            Hint.Text="Click anywhere to start teleportation!"
             local press=false
             local connect=game.Players.LocalPlayer:GetMouse().Button1Click:Connect(function()
                 triggerTeleport(game.Players.LocalPlayer:GetMouse().Hit.Position)
