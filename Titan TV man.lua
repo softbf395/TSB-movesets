@@ -120,7 +120,7 @@ local function triggerTeleport(targetPosition)
         humanoidRootPart.Anchored = true
 
         -- Perform teleportation (adjust position)
-        local targetCFrame = CFrame.new(targetPosition) * CFrame.Angles(0, humanoidRootPart.CFrame.Rotation.Y, 0)
+        local targetCFrame = CFrame.new(targetPosition+Vector3.new(0,3,0)) * CFrame.Angles(0, humanoidRootPart.CFrame.Rotation.Y, 0)
         
 
         -- Trigger particle effects
