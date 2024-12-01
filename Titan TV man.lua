@@ -77,7 +77,7 @@ move4.Activated:Connect(function()
 
     return false -- Player is not near any part, teleportation is allowed
 end
-	local customCooldowns={["0"]=math.huge
+	local customCooldowns={["0"]=math.huge}
 function customSlotCD(CD, MID)
 			if not customCooldowns[tostring(MID)] then
         local move=hotbar[tostring(MID)].Base
