@@ -54,7 +54,7 @@ local buttonevent = ultText.Parent.TextButton.MouseButton1Click:Connect(function
         
         -- Handle sound file download and playback
         if not isfile("SFX/TSB/TTM Awaken Start.mp3") then
-            writefile("SFX/TSB/TTM Awaken Start.mp3", game:HttpGet("https://raw.githubusercontent.com/softbf395/TSB-movesets/refs/heads/main/TTMAwakenStart.mp3"))
+            writefile("SFX/TSB/TTM Awaken Start.mp3", game:HttpGet("https://raw.githubusercontent.com/softbf395/TSB-movesets/refs/heads/main/TTMawakenStart.mp3"))
         end
         local sound = Instance.new("Sound", workspace)
         sound.SoundId = getcustomasset("SFX/TSB/TTM Awaken Start.mp3")
