@@ -154,7 +154,7 @@ hotbar["3"].Base.ToolName.Text="Energy sword 2"
 hotbar["4"].Base.ToolName.Text="Core blast"
 hotbar["5"].Base.ToolName.Text="Shadow Teleportation"
 hotbar["5"].Visible = true
-hotbar["5"].MouseButton1Click:Connect(function()
+hotbar["5"].Base.MouseButton1Click:Connect(function()
             local Hint=Instance.new("Hint", workspace)
             wait(1)
             Hint.Message="3"
