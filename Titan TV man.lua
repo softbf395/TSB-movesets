@@ -164,7 +164,7 @@ hotbar["5"].Base.ToolName.Text="Shadow Teleportation"
 hotbar["5"].Base.Reuse.Visible=false
 hotbar["5"].Visible = true
 hotbar["5"].Base.MouseButton1Click:Connect(function()
-			if customSlotCD(4, 5) then
+			if customSlotCD(10, 5) then
             local Hint=Instance.new("Hint", workspace)
             wait(1)
             Hint.Text="3"
