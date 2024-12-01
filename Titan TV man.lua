@@ -182,7 +182,7 @@ hotbar["5"].Base.MouseButton1Click:Connect(function()
               repeat wait() until press
               connect:Disconnect()
               Hint:Destroy()
-            end)
+            end
 	end
 end
 function fullReset()
