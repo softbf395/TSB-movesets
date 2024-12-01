@@ -18,20 +18,49 @@ if not game.Players.LocalPlayer.Backpack:FindFirstChild("Uppercut") then
 	return
 	end
 notif("Starting moveset:","Titan TV Man")
-local ultText=game.Players.LocalPlayer.PlayerGui.ScreenGui.MagicHealth.TextLabel
-local ultBar=ultText.Parent.Health.Bar
-ultText.Text="Rage Mode"
-ultBar.ImageColor3=Color3.new(1,0,1)
-local tools=game.Players.LocalPlayer.Backpack
+function resetTools()
+	local tools=game.Players.LocalPlayer.Backpack
 local move1=tools["Normal Punch"]
 local move2=tools["Consecutive Punches"]
 local move3=tools["Shove"]
 local move4=tools["Uppercut"]
+local animRSOD=Instance.new("Animation", game.ReplicatedStorage)
+animRSOD.AnimationId="rbxassetid://84331994888547"
+local animES1=Instance.new("Animation", game.ReplicatedStorage)
+animES1.AnimationId="rbxassetid://78236967627477"
+local animES2=Instance.new("Animation", game.ReplicatedStorage)
+animES2.AnimationId="rbxassetid://110998875969052"
+local animCore=Instance.new("Animation", game.ReplicatedStorage)
+animCore.AnimationId="rbxassetid://81133258017045"
+function PlayAnim(anim)
+	game.Players.LocalPlayer.Character:FindFirstChildOfClass("Humanoid"):StopAllAnimations()
+	game.Players.LocalPlayer.Character:FindFirstChildOfClass("Humanoid"):LoadAnimation(anim):Play()
+end
 local hotbar=game.Players.LocalPlayer.PlayerGui.Hotbar.Backpack.Hotbar
+move1.Activated:Connect(function()
+		PlayAnim(animRSOD)
+	end)
+move2.Activated:Connect(function()
+		PlayAnim(animES1)
+	end)
+move3.Activated:Connect(function()
+		PlayAnim(animES2)
+	end)
+move4.Activated:Connect(function()
+		PlayAnim(animCore)
+	end)
 hotbar["1"].Base.ToolName.Text="RSOD"
 hotbar["2"].Base.ToolName.Text="Energy sword 1"
 hotbar["3"].Base.ToolName.Text="Energy sword 2"
 hotbar["4"].Base.ToolName.Text="Core blast"
+end
+function fullReset()
+	resetTools()
+	local ultText=game.Players.LocalPlayer.PlayerGui.ScreenGui.MagicHealth.TextLabel
+local ultBar=ultText.Parent.Health.Bar
+ultText.Text="Rage Mode"
+ultBar.ImageColor3=Color3.new(1,0,1)
+
 local buttonevent = ultText.Parent.TextButton.MouseButton1Click:Connect(function()
     local canUse = ultText.Parent.Ult.Visible
     if canUse then
@@ -76,4 +105,10 @@ local buttonevent = ultText.Parent.TextButton.MouseButton1Click:Connect(function
         text:Destroy()
         screenGui:Destroy()
     end
+end)
+end
+fullReset()
+game.Players.LocalPlayer.CharacterAdded:Connect(function()
+		wait(1)
+		fullReset()
 end)
