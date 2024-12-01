@@ -50,10 +50,128 @@ move3.Activated:Connect(function()
 move4.Activated:Connect(function()
 		PlayAnim(animCore)
 	end)
+	local function isNearWall(player, distanceThreshold)
+    local humanoidRootPart = player.Character:WaitForChild("HumanoidRootPart")
+    local rayOrigin = humanoidRootPart.Position
+    local rayDirection = Vector3.new(0, -1, 0) -- Check downward to avoid collisions with other objects
+
+    -- Cast ray in all directions to detect proximity to walls
+    local raycastParams = RaycastParams.new()
+    raycastParams.FilterType = Enum.RaycastFilterType.Exclude
+    raycastParams.FilterDescendantsInstances = {player.Character}  -- Exclude player's own character
+
+    -- Raycast for collisions in all directions (e.g., forward, backward, left, right)
+    local directions = {
+        Vector3.new(1, 0, 0), -- Right
+        Vector3.new(-1, 0, 0), -- Left
+        Vector3.new(0, 0, 1), -- Forward
+        Vector3.new(0, 0, -1), -- Backward
+    }
+
+    for _, dir in ipairs(directions) do
+        local raycastResult = workspace:Raycast(rayOrigin, dir * distanceThreshold, raycastParams)
+        if raycastResult then
+            return true -- Player is too close to a part, can't teleport
+        end
+    end
+
+    return false -- Player is not near any part, teleportation is allowed
+end
+	local customCooldowns={["0"]=math.huge
+function customSlotCD(CD, MID)
+			if not customCooldowns[tostring(MID)] then
+        local move=hotbar[tostring(MID)].Base
+        local cdf=Instance.new("Frame")
+        cdf.Size=UDim2.new(1,0,1,0)
+        cdf.BackgroundColor3=Color3.new(1,0,0)
+        cdf.BackgroumdTransparency=0.6
+        cdf.ZIndex=10
+        customCooldowns[tostring(MID)]=CD
+        spawn(function()
+            game:GetService("TweenService"):Create(cdf, TweenInfo.new(CD, enum.EasingStyle.Linear), {Size=UDim2.new(1,0,0,0), Position=UDim2.new(0,0,1,0)}):Play()
+            wait(CD)
+            cdf:Destroy()
+            customCooldowns[tostring(MID)]=nil
+        return true
+      else
+        return false
+      end
+    end
+		
+local function triggerTeleport(targetPosition)
+    --local currentTime = tick()
+    if customCooldow(4, 5) then
+        local character = game.Players.LocalPlayer.Character
+        local humanoidRootPart = character:WaitForChild("HumanoidRootPart")
+        
+        -- Check if the player is too close to any part (1.5 studs)
+        if isNearWall(game.Players.LocalPlayer, 1.5) then
+            print("Cannot teleport too close to a wall!")
+            return  -- Abort teleportation if near a wall
+        end
+        local humanoid = character:WaitForChild("Humanoid")
+        if humanoid:GetState() == Enum.HumanoidStateType.Seated then
+            print("Cannot teleport while stunned!")
+            return
+        end
+
+        -- Anchor the HumanoidRootPart during teleportation to prevent weird movement
+        humanoidRootPart.Anchored = true
+
+        -- Perform teleportation (adjust position)
+        local targetCFrame = CFrame.new(targetPosition) * CFrame.Angles(0, humanoidRootPart.CFrame.Rotation.Y, 0)
+        humanoidRootPart.CFrame = targetCFrame
+
+        -- Trigger particle effects
+        local particles = Instance.new("ParticleEmitter", humanoidRootPart)
+        particles.Enabled = true
+
+        -- Teleportation completed event (when particles are gone)
+        particles.Ended:Connect(function()
+            humanoidRootPart.Anchored = false
+            teleporting = false
+        end)
+
+        -- Handle damage detection and cooldown
+        humanoid.HealthChanged:Connect(function(health)
+            if teleporting and health < humanoid.Health then
+                humanoidRootPart.Anchored = false
+                particles.Enabled = false
+                teleporting = false
+                print("Teleportation cancelled due to damage!")
+            end
+        end)
+
+        teleporting = true
+        lastTeleport = currentTime
+    end
+end
+
 hotbar["1"].Base.ToolName.Text="RSOD"
 hotbar["2"].Base.ToolName.Text="Energy sword 1"
 hotbar["3"].Base.ToolName.Text="Energy sword 2"
 hotbar["4"].Base.ToolName.Text="Core blast"
+hotbar["5"].Base.ToolName.Text="Shadow Teleportation"
+hotbar["5"].Visible = true
+hotbar["5"].MouseButton1Click:Connect(function()
+            local Hint=Instance.new("Hint", workspace)
+            wait(1)
+            Hint.Message="3"
+            wait(1)
+            Hint.Message="2"
+            wait(1)
+            Hint.Message="1"
+            wait(1)
+            Hint.Message="Click anywhere to start teleportation!"
+            local press=false
+            local connect=game.Players.LocalPlayer:GetMouse().Button1Click:Connect(function()
+                triggerTeleport(game.Players.LocalPlayer:GetMouse().Hit.Position
+               press=true
+                end)
+              repeat wait() until press
+              connect:Disconnect()
+              Hint:Destroy()
+            end)
 end
 function fullReset()
 	resetTools()
