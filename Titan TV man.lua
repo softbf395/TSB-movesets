@@ -32,3 +32,36 @@ hotbar["1"].Base.ToolName.Text="RSOD"
 hotbar["2"].Base.ToolName.Text="Energy sword 1"
 hotbar["3"].Base.ToolName.Text="Energy sword 2"
 hotbar["4"].Base.ToolName.Text="Core blast"
+local buttonevent=ultText.Parent.TextButton.MouseButton1Click:Connect(function()
+              local canUse=ultText.Parent.Ult.Visible
+    if canUse then
+      local text=Instance.new("TextLabel", Instance.new("ScreenGui", game.Players.LocalPlayer.PlayerGui))
+      text.Size=UDim2.new(1,0,1,0)
+      text.BackgroundTransparency=1
+      text.TextScaled=true
+      text.Text=""
+      text.TextColor3=Color3.new(1,0,1)
+      wait(1)
+      text.Text="."
+      wait(1)
+      text.Text=".."
+      wait(1)
+      text.Text="..."
+      if not isfile("SFX/TSB/TTM Awaken Start.mp3") then
+        writefile("SFX/TSB/TTM Awaken Start.mp3", game:HttpGet("https://raw.githubusercontent.com/softbf395/TSB-movesets/refs/heads/main/TTMAwakenStart.mp3"))
+      end
+      local Sound=Instance.new("Sound", workspace)
+      Sound.SoundId=getcustomasset("SFX/TSB/TTM Awaken Start.mp3")
+      Sound:Play()
+      text.Text="hehehehe.."
+      wait(1.2)
+      text.Text="You thought i was done?"
+      wait(2.2)
+      text.Text="Think again.."
+      wait(1.3)
+      text.Text="I am the titan tv man.."
+      wait(2)
+      text.Text="And you.. i will go all out!"
+      wait(1)
+      text:Destroy()
+	end)
