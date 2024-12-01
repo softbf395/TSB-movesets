@@ -92,6 +92,7 @@ function customSlotCD(CD, MID)
             wait(CD)
             cdf:Destroy()
             customCooldowns[tostring(MID)]=nil
+				end)
         return true
       else
         return false
