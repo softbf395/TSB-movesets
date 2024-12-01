@@ -165,7 +165,7 @@ hotbar["5"].Base.MouseButton1Click:Connect(function()
             wait(1)
             Hint.Text="Click anywhere to start teleportation!"
             local press=false
-            local connect=game.Players.LocalPlayer:GetMouse().Button1Click:Connect(function()
+            local connect=game.Players.LocalPlayer:GetMouse().Button1Down:Connect(function()
                 triggerTeleport(game.Players.LocalPlayer:GetMouse().Hit.Position)
                press=true
                 end)
