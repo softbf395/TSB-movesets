@@ -66,12 +66,12 @@ function PlayAnim(anim)
     -- Iterate through animation information
     for _, info in ipairs(anim) do
         local part = game.Players.LocalPlayer.Character:FindFirstChild(info.Part)
-        if part then
+        if part and part:IsA("BasePart") then
             -- Create OG folder for storing original position and rotation if it doesn't exist
 				local og
             if not part:FindFirstChild("OG") then
                 local ogF = Instance.new("Folder", part)
-                ogF.Name = "OG"
+                ogF.Name = "OGVALUESPM"
 					og = ogF
 
                 local PosX, PosY, PosZ = Instance.new("NumberValue", ogF), Instance.new("NumberValue", ogF), Instance.new("NumberValue", ogF)
@@ -92,9 +92,9 @@ function PlayAnim(anim)
             local frameRate = info.FrameRate or 0.05 -- Time between each update (50ms default)
 
             -- Anchor the part if not already anchored
-            if not part.Anchored then
+            --if not part.Anchored then
                 part.Anchored = true
-            end
+            --end
 
             -- Constant animation (step-by-step frame updates)
             spawn(function()
@@ -133,7 +133,7 @@ function PlayAnim(anim)
     end
     for _, part in ipairs(game.Players.LocalPlayer.Character:GetChildren()) do
       if part:IsA("BasePart") then part.Anchored=false end
-      if part:FindFirstChild("OG") then part.OG:Destroy() end
+      if part:FindFirstChild("OGVALUESPM") then part.OGVALUESPM:Destroy() end
     end
 end
 
