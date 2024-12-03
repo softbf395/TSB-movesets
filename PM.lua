@@ -149,18 +149,23 @@ move2.Activated:Connect(function()
         local ts=game:GetService("TweenService")
         local head=game.Players.LocalPlayer.Character.Head
         local cam=workspace.CurrentCamera
-        ts:Create(cam, TweenInfo.new(1), {CFrame=CFrame.new((head.CFrame * CFrame.new(0,0,2)).Position, head.Position)}):Play()
+        ts:Create(cam, TweenInfo.new(1), {CFrame=CFrame.new((head.CFrame * CFrame.new(-0.3,-0.1,-2)).Position, head.Position)}):Play()
         wait(1.25)
-        ts:Create(cam, TweenInfo.new(1), {CFrame=CFrame.new((head.CFrame * CFrame.new(0,-0.25,-5)).Position, head.Position)}):Play()
-        ts:Create(game.Lighting, TweenInfo.new(1), {Brightness=-10}):Play()
+        ts:Create(cam, TweenInfo.new(1), {CFrame=CFrame.new((head.CFrame * CFrame.new(0,-0.25,5)).Position, head.Position)}):Play()
+        ts:Create(game.Lighting, TweenInfo.new(1), {Brightness=-9999}):Play()
         local Highlight=Instance.new("Highlight", head.Parent)
         Highlight.OutlineColor3=Color3.new(1,1,1)
+			Highlight.FillColor=Color3.new(0,0,0)
+			local Highlight2=Highlight:Clone()
+			Highlight2.OutlineTransparency=1
+			Highlight2.FillTransparency=0
         Highlight.OutlineTransparency=0
         wait(1.75)
         Highlight:Destroy()
+			Highlight2:Destroy()
         ts:Create(game.Lighting, TweenInfo.new(1), {Brightness=br}):Play()
         wait(0.2)
-        cam.CameraType="Custom"
+        workspace.CurrentCamera.CameraType="Custom"
 	end)
 move3.Activated:Connect(function()
 		PlayAnim(animES2)
