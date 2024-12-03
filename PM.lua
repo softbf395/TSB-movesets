@@ -68,9 +68,11 @@ function PlayAnim(anim)
         local part = game.Players.LocalPlayer.Character:FindFirstChild(info.Part)
         if part then
             -- Create OG folder for storing original position and rotation if it doesn't exist
+				local og
             if not part:FindFirstChild("OG") then
                 local ogF = Instance.new("Folder", part)
                 ogF.Name = "OG"
+					og = ogF
 
                 local PosX, PosY, PosZ = Instance.new("NumberValue", ogF), Instance.new("NumberValue", ogF), Instance.new("NumberValue", ogF)
                 PosX.Name, PosY.Name, PosZ.Name = "X", "Y", "Z"
@@ -79,6 +81,8 @@ function PlayAnim(anim)
                 local RotX, RotY, RotZ = Instance.new("NumberValue", ogF), Instance.new("NumberValue", ogF), Instance.new("NumberValue", ogF)
                 RotX.Name, RotY.Name, RotZ.Name = "RotX", "RotY", "RotZ"
                 RotX.Value, RotY.Value, RotZ.Value = part.Orientation.X, part.Orientation.Y, part.Orientation.Z
+				else
+					og=part.OG
             end
 
             -- Animation parameters
@@ -96,8 +100,8 @@ function PlayAnim(anim)
             spawn(function()
                 wait(delay)
 
-                local OGPos = Vector3.new(part.OG.X.Value, part.OG.Y.Value, part.OG.Z.Value)
-                local OGRot = Vector3.new(part.OG.RotX.Value, part.OG.RotY.Value, part.OG.RotZ.Value)
+                local OGPos = Vector3.new(og.X.Value, og.Y.Value, og.Z.Value)
+                local OGRot = Vector3.new(og.RotX.Value, og.RotY.Value, og.RotZ.Value)
 
                 local targetPos = OGPos + Pos
                 local targetRot = OGRot + Rot
