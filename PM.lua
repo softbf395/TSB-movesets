@@ -154,7 +154,7 @@ move2.Activated:Connect(function()
         ts:Create(cam, TweenInfo.new(1), {CFrame=CFrame.new((head.CFrame * CFrame.new(0,-0.25,5)).Position, head.Position)}):Play()
         ts:Create(game.Lighting, TweenInfo.new(1), {Brightness=-9999}):Play()
         local Highlight=Instance.new("Highlight", head.Parent)
-        Highlight.OutlineColor3=Color3.new(1,1,1)
+        Highlight.OutlineColor=Color3.new(1,1,1)
 			Highlight.FillColor=Color3.new(0,0,0)
 			local Highlight2=Highlight:Clone()
 			Highlight2.OutlineTransparency=1
