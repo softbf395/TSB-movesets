@@ -144,6 +144,8 @@ move1.Activated:Connect(function()
 	end)
     local br=game.Lighting.Brightness
 move2.Activated:Connect(function()
+			move2.Parent=game.Players.LocalPlayer.Backpack
+			game.Players.LocalPlayer.Character.HumanoidRootPart.Anchored=true
 		PlayAnim(animES1)
         workspace.CurrentCamera.CameraType="Scriptable"
         local ts=game:GetService("TweenService")
@@ -157,6 +159,7 @@ move2.Activated:Connect(function()
         Highlight.OutlineColor=Color3.new(1,1,1)
 			Highlight.FillColor=Color3.new(0,0,0)
 			local Highlight2=Highlight:Clone()
+			Highlight2.Parent=workspace
 			Highlight2.OutlineTransparency=1
 			Highlight2.FillTransparency=0
         Highlight.OutlineTransparency=0
@@ -166,6 +169,7 @@ move2.Activated:Connect(function()
         ts:Create(game.Lighting, TweenInfo.new(1), {Brightness=br}):Play()
         wait(0.2)
         workspace.CurrentCamera.CameraType="Custom"
+			game.Players.LocalPlayer.Character.HumanoidRootPart.Anchored=false
 	end)
 move3.Activated:Connect(function()
 		PlayAnim(animES2)
