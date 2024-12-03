@@ -335,7 +335,7 @@ local buttonevent = ultText.Parent.TextButton.MouseButton1Click:Connect(function
         --sound:Play()
         
         -- Additional text animations
-        text.Text = "guys”
+        text.Text = "guys"
         task.wait(1.2)
         text.Text = "note:"
         task.wait(2.2)
