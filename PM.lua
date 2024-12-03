@@ -36,6 +36,7 @@ local animES1={
       R=Vector3.new(15,0,0),
       TimeStart=3.2
     }
+}
 local animES2= {
     -- Arm goes back to charge
     {
